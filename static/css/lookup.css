@@ -1,0 +1,63 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.inputForm {
+  padding-bottom: 4px;
+  display: flex;
+}
+
+.emailInput {
+  text-transform: capitalize;
+}
+
+table, th, td {
+  border: 1px solid lightgray;
+  border-collapse: collapse;
+}
+
+table {
+  justify-content: center;
+  gap: 4px;
+}
+
+th {
+  text-transform: capitalize;
+  text-align: left;
+  padding: 4px;
+}
+
+td {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: dodgerblue;
+  text-transform: capitalize;
+  padding: 4px;
+  font-size: 14px;
+}
+
+.edit-link {
+  justify-content: center;
+  align-items: center;
+}
+
+tr:nth-child(even) {
+  background-color: #ddd;
+} 
+
+.emailInput {
+  border: solid 1px darkblue;
+}
+
+.buttonsContainer {
+  max-width: 80%;
+  justify-content: space-between;
+}
+
+table button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}

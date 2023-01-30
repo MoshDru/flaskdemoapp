@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Details</title>
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/lookup.css') }}"
+  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <body>
+    <form class="inputForm" action="" method="post">
+      <input type="hidden" name="type" value="lookup">
+      <input type="text" name="email" placeholder="Email"/>
+      <input class="sendButton" type="submit" value="Look Up"/>
+    </form>
+
+    {% if user_details %}
+    <table>
+      {% for detail in user_details %}
+      <tr>
+        <th>{{detail}}</th>
+        <td class="formOutput" id="{{detail}}-field" title="{{user_details[detail]}}">{{user_details[detail] if user_details[detail] is not none}}</td>
+        <form id="edit-{{detail}}" method="post" action="" style="display: none">
+          <td id="editInput-{{detail}}" style="display:none;">
+            <input type="hidden" name="type" value="edit">
+            <input class="emailInput" type="text" name="value" value="{{user_details[detail] if user_details[detail] is not none}}" />
+            <input type="hidden" name="column" value="{{detail}}" />
+            <input type="hidden" name="id" value="{{user_details.id}}" />
+          </td>
+            
+          <td id="buttonsContainer">
+            <button class="submitButton" id="submitButton-{{detail}}" type="submit" style="display:none;"><i class="fa fa-check" aria-hidden="true" style="color:green"></i></button>
+            <button class="cancelButton" id="cancelButton-{{detail}}" type="button" onclick="showEdit(this,'{{detail}}')" style="display:none;"><i class="fa fa-close" style="color:red"></i></button>
+            {% if detail not in ["id", "timestamp", "uid"] %}
+            <button class="edit-link" id="editButton-{{detail}}" type="button" onclick="editField(this,'{{detail}}')" style="color:darkblue"><i class="fa fa-pencil"></i></button>
+            {% endif %}
+          </form>
+          </td>
+      </tr>
+
+      {% endfor %}
+    </table>
+    {% endif %}
+  </body>
+
+  <script>
+    function editField(e, detail) {
+      document.getElementById("editButton-" + detail).style.display = "none"; //hide edit button id="editButton-{{detail}}"
+      document.getElementById(detail + "-field").style.display = "none"; //hide cell id="{{detail}}-field"
+      document.getElementById("edit-" + detail).style.display = ""; //show form id="edit-{{detail}}"
+      document.getElementById("cancelButton-" + detail).style.display = "";
+      document.getElementById("editInput-" + detail).style.display = "";
+      document.getElementById("submitButton-" + detail).style.display = "";
+    }
+  </script>
+  <script>
+    function showEdit(e, detail) {
+      document.getElementById("editButton-" + detail).style.display = ""; //show edit button id="editButton-{{detail}}"
+      document.getElementById(detail + "-field").style.display = ""; //show cell id="{{detail}}-field"
+      document.getElementById("edit-" + detail).style.display = ""; //hide form id="edit-{{detail}}"
+      document.getElementById("cancelButton-" + detail).style.display = "none";
+      document.getElementById("editInput-" + detail).style.display = "none";
+      document.getElementById("submitButton-" + detail).style.display = "none";
+    }
+  </script>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image</title>
+    <!-- image.html -->
+  <body>
+    {% if user_pictures %}
+    <table>
+    {% for picture in user_pictures %}
+    <tr>
+      <th>{{picture}}</th>
+      <td>{{user_pictures[picture] if user_pictures[picture] is not none}}</td>
+    </tr>
+    <img src="{{user_pictures}}" />
+    {% endfor %}
+    </table>
+    {% endif %}
+  </body>
+</html>
